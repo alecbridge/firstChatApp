@@ -11,6 +11,7 @@
   import { StyleSheet, css } from 'aphrodite';
 
   import Horizon from '@horizon/client';
+  import {chat} from './stores.jsx';
 
   var appContainer = {
     width:'800px',
@@ -110,12 +111,6 @@
     opacity: '.6',
     fontFamily: 'arial',
   }
-
-  const horizon = Horizon({
-    secure: false,
-    host: 'localhost:8181'
-  });
-  const chat = horizon('messages');
 
   class App extends Component {
     constructor(props) {

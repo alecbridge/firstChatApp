@@ -5,7 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "hjs-dev-server"
+    "start": "npm-run-all --parallel serve:dev:server serve:dev:client",
+    "start:prod": "npm run schema:restore && npm run serve:prod",
+    "deploy": "npm run build:prod && npm run schema:dump && npm run schema:commit && git push deploy -f",
+    "build:dev": "webpack",
+    "build:prod": "NODE_ENV=production webpack",
+    "serve:dev:client": "hjs-dev-server",
+    "serve:dev:server": "hz serve --dev",
+    "serve:prod": "node ./util/server/express.js",
+    "schema:commit": "git add ./.hz/schema.toml >/dev/null || true && git commit -m \"Updated DB Schema\" ./.hz/schema.toml >/dev/null || true",
+    "schema:dump": "hz get-schema -o ./.hz/schema.toml",
+    "schema:restore": "hz set-schema ./.hz/schema.toml --connect $(./util/scripts/parseurl.sh $RETHINKDB_URL)"
   },
   "repository": {
     "type": "git",
@@ -20,8 +30,13 @@
   "homepage": "https://github.com/alecbridge/firstChatApp#readme",
   "dependencies": {
     "@horizon/client": "^1.1.3",
+    "@horizon/server": "^1.1.3",
     "aphrodite": "^0.5.0",
+    "express": "^4.14.0",
     "hjs-webpack": "^8.3.0",
+    "horizon": "^1.1.3",
+    "normalize.css": "^4.2.0",
+    "npm-run-all": "^2.3.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1"

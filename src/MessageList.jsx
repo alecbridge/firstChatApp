@@ -20,7 +20,7 @@ export default class MessageList extends Component {
         {this.state.messages.map(function(message){
           return (
             <div key={message.id}>
-              {message.author} : {message.text}
+              {message.author}: {message.text}
             </div>
           );
         })}
