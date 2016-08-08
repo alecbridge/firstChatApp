@@ -120,13 +120,16 @@
   class App extends Component {
     constructor(props) {
       super(props);
+      this.state = {
+        messages: []
+      }
     }  
 
     //Tells what to do upon clicking send
     handleSendClick() {
       var now = new Date();
       chat.store({
-        author: 'Alec Bridge',
+        author: localStorage.getItem('nickname'),
         text: 'test message',
         datetime: now.getTime()
       })
@@ -151,12 +154,12 @@
             <input type="checkbox" value="Important" style={importantStyle}/>  
             <input type="submit" value="Send" onClick={this.handleSendClick.bind(this)} style={sendStyle} />
             {this.state.messages.map(function(message){
-            return (
-              <div key={message.id}>
-                {message.author} : {message.text}
-              </div>
-            );    
-          })}
+              return (
+                <div key={message.id}>
+                  {message.author} : {message.text}
+                </div>
+              );    
+            })}
           </form>
           <div style={bottomReference}>
             <span>{localStorage.getItem('nickname')} | </span>
@@ -167,39 +170,6 @@
       );
     }
   }
-
-/*
-class MessageList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      messages: []
-    };
-
-    this.props.chat.watch().subscribe((result) => {
-      this.setState({messages: result});
-    })
-  }
-
-
-  render() {
-
-    return (
-      <div>
-        {this.state.messages.map(function(message){
-          return (
-            <div key={message.id}>
-              {localStorage.getItem('nickname')}: {message.text}
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
-
-*/
 
   ReactDOM.render(
     <Router history={browserHistory}>
