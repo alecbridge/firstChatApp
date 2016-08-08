@@ -121,17 +121,26 @@
     constructor(props) {
       super(props);
       this.state = {
-        messages: []
+        messages: [],
+        note: '',
       }
+      chat.watch().subscribe((results) =>{
+        this.setState({messages:results});
+      })
     }  
 
+    handleNoteChange(e) {
+      this.setState({note: e.target.value});
+      localStorage.setItem('note', this.state.note)
+    }
+
     //Tells what to do upon clicking send
-    handleSendClick() {
+    handleSendClick(e) {
+      e.preventDefault()
       var now = new Date();
       chat.store({
         author: localStorage.getItem('nickname'),
-        text: 'test message',
-        datetime: now.getTime()
+        text: this.state.note,
       })
     }
 
@@ -148,18 +157,11 @@
           <div style={noteHolder}>
             <MessageList chat={chat} />
           </div>
-          <form style={inputStyles}>
-            <input type="text" placeholder="Enter Your Note" style={noteBox} />
+          <form onSubmit={this.handleSendClick.bind(this)} style={inputStyles}>
+            <input type="text" placeholder="Enter Your Note" onChange={this.handleNoteChange.bind(this)} style={noteBox} />
             <span style={importantTextStyle}>Important: </span> 
             <input type="checkbox" value="Important" style={importantStyle}/>  
-            <input type="submit" value="Send" onClick={this.handleSendClick.bind(this)} style={sendStyle} />
-            {this.state.messages.map(function(message){
-              return (
-                <div key={message.id}>
-                  {message.author} : {message.text}
-                </div>
-              );    
-            })}
+            <input type="submit" value="Send" style={sendStyle} />
           </form>
           <div style={bottomReference}>
             <span>{localStorage.getItem('nickname')} | </span>
