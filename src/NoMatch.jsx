@@ -7,7 +7,8 @@ var noMatchStyle = {
   textAlign:'center',
   margin:'0 auto',
   border: '3px solid #333',
-  boxShadow: '3px 2px 25px 3px rgba(255,204,0,0.91)'
+  fontFamily: 'arial',
+  fontSize: '16px',
 }
 
 export default class NoMatch extends Component {
@@ -15,7 +16,7 @@ export default class NoMatch extends Component {
     return (
       <div style={noMatchStyle}>
         <img src="http://i.imgur.com/KsPIFpv.jpg" />
-        <h2>..You shouldn't be here.. Lets try <a href='/'>Here</a></h2>
+        <h2>..That page wasn't found.. <br /> Lets try starting over back <a href='/'>Here</a></h2>
       </div>  
     );
   }

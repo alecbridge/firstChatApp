@@ -18,14 +18,14 @@
     height:'525px',
     margin: '0 auto',
     marginTop: '20px',
-    backgroundColor:'#7edda3',
     backgroundImage:'url("http://i287.photobucket.com/albums/ll139/vmsg/Abstract%20sigs/abstract-waves-byvanesinger.png")', 
+    backgroundColor:'#7edda3',
     opacity: .8,
     border: '3px solid #333',
     borderRadius: '5px',
     boxShadow: '2px 2px 14px 2px rgba(32,32,33,0.91)',
   }
-
+  
   var noteHolder = {
     width: '96%',
     height: '75%',
