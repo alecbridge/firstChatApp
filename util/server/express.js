@@ -25,12 +25,14 @@ var urlRethinkDB = url.parse(process.env.RETHINKDB_URL);
 
 const options = {
   auth: {
-    token_secret: 'my_super_secret_secret',
+    token_secret: 'zqdkjvbwhlknb239uh53b0bjb230hcjd129g',
     allow_anonymous: true,
     allow_unauthenticated: true
   },
+  auto_create_collection: true,
+  auto_create_index: true,
   permissions: false,
-  project_name: 'react_webpack_horizon',
+  project_name: 'noteoriety',
   rdb_host: urlRethinkDB.hostname,
   rdb_port: urlRethinkDB.port
 };
