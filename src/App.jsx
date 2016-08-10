@@ -31,7 +31,7 @@
     height: '75%',
     // width:'650px',
     // height: '400px',
-    backgroundColor:'whitesmoke',
+    backgroundColor:'#efefef',
     marginLeft:'15px',
     marginTop:'15px',
     border: '2px solid grey',
@@ -131,6 +131,7 @@
 
     //Tells what to do upon clicking send
     handleSendClick(e) {
+      document.getElementById("noteInput").value = '';
       e.preventDefault()
       var now = new Date();
       chat.store({
@@ -150,10 +151,10 @@
         <div style={appContainer}>
           <input type="button" value="&#10006;" style={exitStyle} onClick={this.onExitClick.bind(this)} />
           <div style={noteHolder}>
-            <MessageList chat={chat} />
+            <MessageList chat={chat}  />
           </div>
           <form onSubmit={this.handleSendClick.bind(this)} style={inputStyles}>
-            <input type="text" placeholder="Enter Your Note" onChange={this.handleNoteChange.bind(this)} style={noteBox} />
+            <input type="text" placeholder="Enter Your Note" onChange={this.handleNoteChange.bind(this)} style={noteBox} id="noteInput" />
             <span style={importantTextStyle}>Important: </span> 
             <input type="checkbox" value="Important" style={importantStyle}/>  
             <input type="submit" value="Send" style={sendStyle} />
